@@ -1,0 +1,8 @@
+{"cases":[
+  {"id":1,"priority":"p0","description":"打开任务管理页面，预期看到标题「智能任务管理」和添加任务输入框"},
+  {"id":2,"priority":"p0","description":"输入任务标题并选择优先级后点击添加，预期任务出现在列表中"},
+  {"id":3,"priority":"p0","description":"点击任务的完成按钮，预期任务标题显示删除线样式"},
+  {"id":4,"priority":"p0","description":"点击任务的删除按钮，预期该任务从列表中消失"},
+  {"id":5,"priority":"p1","description":"选择优先级筛选为「高」，预期列表只显示高优先级任务"},
+  {"id":6,"priority":"p1","description":"任务列表按创建时间倒序排列，新添加的任务在最上方"}
+]}
