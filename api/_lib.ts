@@ -19,24 +19,20 @@ export interface TaskDto {
   createdAt: string;
 }
 
+const DEFAULT_SUPABASE_URL = 'https://mdxikgbbkhwcoweztipc.supabase.co';
+const DEFAULT_SUPABASE_PUBLISHABLE_KEY =
+  'sb_publishable_sXw9SAhlihI2m0Y5_HPxSQ_ybcApMCE';
+
 let clientInstance: SupabaseClient | null = null;
 
 export function getDb(): SupabaseClient {
   if (!clientInstance) {
-    const url = process.env.SUPABASE_URL || '';
+    // 环境变量优先；未配置时使用项目内置的默认配置，保证开箱可用
+    const url = process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL;
     const key =
       process.env.SUPABASE_SERVICE_ROLE_KEY ||
       process.env.SUPABASE_PUBLISHABLE_KEY ||
-      '';
-
-    if (!url) {
-      throw new Error('SUPABASE_URL 未配置，请在 Vercel 环境变量中设置');
-    }
-    if (!key) {
-      throw new Error(
-        'SUPABASE_SERVICE_ROLE_KEY 或 SUPABASE_PUBLISHABLE_KEY 未配置，请在 Vercel 环境变量中设置',
-      );
-    }
+      DEFAULT_SUPABASE_PUBLISHABLE_KEY;
 
     clientInstance = createClient(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
